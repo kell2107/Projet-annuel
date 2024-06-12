@@ -327,8 +327,13 @@ while running:
         pygame.display.flip()
         pygame.time.wait(5000)
         running = False
+<<<<<<< HEAD
     def ia ():
         
+=======
+    # def ia ():
+    #     pass
+>>>>>>> ecf3abb9fc575943437073311a8961dba8f67d68
     pygame.display.flip()
 
 pygame.quit()
