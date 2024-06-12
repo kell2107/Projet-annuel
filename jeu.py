@@ -327,7 +327,8 @@ while running:
         pygame.display.flip()
         pygame.time.wait(5000)
         running = False
-
+    def ia ():
+        pass
     pygame.display.flip()
 
 pygame.quit()
