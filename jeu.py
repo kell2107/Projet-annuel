@@ -326,7 +326,7 @@ while running:
         draw_victory_message(screen, victory_message, width, height)
         pygame.display.flip()
         pygame.time.wait(5000)
-        
+        running = False
     def ia ():
         pass
     pygame.display.flip()
