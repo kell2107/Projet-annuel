@@ -1,21 +1,41 @@
 import pygame
 import random
+import time 
+""" from tkinter import * """
 
 # Initialisation de pygame
 pygame.init()
+
+""" #fonction time 
+def Timer(duree):
+    while duree >= 0:
+        time.sleep(1)
+        texte_timer['text'] = str(duree) + "s"
+        duree -= 1
+
+        if duree == 0:
+
+            duree -= 1
+
+
+texte_timer= Label(text="")
+texte_timer.pack(expand=YES)
+
+Timer(5) """
+
 
 # Dimensions de la fenêtre et de la carte
 tile_size = 30
 size = 20
 width, height = size * tile_size, size * tile_size
-interface_height = 100  # Hauteur supplémentaire pour l'interface
+interface_height = 150  # Hauteur supplémentaire pour l'interface
 
 # Couleurs
 PASSABLE_COLOR = (200, 200, 200)        # Gris clair pour les cases passables
 PLAYER_COLOR = (0, 0, 255)              # Bleu pour le joueur
 PLAYER_COLOR_LIGHT = (100, 100, 255)    # Bleu clair pour le joueur capable de bouger
-ENEMY_COLOR = (255, 0, 0)               # Rouge pour les ennemis
-ENEMY_COLOR_LIGHT = (255, 100, 100)     # Rouge clair pour les ennemis capables de bouger
+ENEMY_COLOR = (255, 0, 0)               # Rouge pour L'IA
+ENEMY_COLOR_LIGHT = (255, 100, 100)     # Rouge clair pour L'IA
 SELECTED_COLOR = (0, 255, 0)            # Vert pour la sélection
 OBJECTIVE_MAJOR_COLOR = (255, 255, 0)   # Jaune pour objectif majeur
 OBJECTIVE_MINOR_COLOR = (255, 215, 0)   # Doré pour objectif mineur
@@ -26,10 +46,10 @@ class Unit:
         self.x = x
         self.y = y
         self.color = color
-        self.selected = False
         self.moved = False  # Indicateur de mouvement pour le tour
         self.pv = 2  # Points de Vie
         self.attacked_this_turn = False  # Indicateur d'attaque dans ce tour
+        self.selected = False  # Indicateur de sélection
 
     def draw(self, screen, units, objectives):
         """Affiche l'unité sur l'écran."""
@@ -76,15 +96,22 @@ class Unit:
 
             if target_unit.attacked_this_turn:
                 target_unit.pv -= 1
+                target_unit.attacked_this_turn = False
                 if target_unit.pv <= 0:
                     units.remove(target_unit)
                     return
-
-            if not (0 <= new_x < size and 0 <= new_y < size) or any(u.x == new_x and u.y == new_y and u.color != target_unit.color for u in units):
-                units.remove(target_unit)
+                elif 0 <= new_x < size and 0 <= new_y < size:
+                    if any(u.x == new_x and u.y == new_y and u.color != target_unit.color for u in units) or any(obj['x'] == new_x and obj['y'] == new_y and obj['type'] == 'MAJOR' for obj in objectives):
+                        units.remove(target_unit)
+                    else:
+                        target_unit.move(new_x, new_y)
             else:
-                target_unit.move(new_x, new_y)
-                target_unit.attacked_this_turn = True
+                if 0 <= new_x < size and 0 <= new_y < size:
+                    if any(u.x == new_x and u.y == new_y and u.color != target_unit.color for u in units) or any(obj['x'] == new_x and obj['y'] == new_y for obj in objectives):
+                        units.remove(target_unit)
+                    else:
+                        target_unit.move(new_x, new_y)
+                        target_unit.attacked_this_turn = True
 
     def get_symbols_on_same_tile(self, units):
         """Retourne les symboles des unités sur la même case."""
@@ -98,14 +125,13 @@ class Unit:
 # Générer la carte
 def generate_map(size):
     """Génère une carte de taille spécifiée."""
-    print([[1 for _ in range(size)] for _ in range(size)])
     return [[1 for _ in range(size)] for _ in range(size)]
 
 # Afficher la carte
 def draw_map(screen, game_map, tile_size):
     """Affiche la carte."""
-    for y in range(size):
-        for x in range(size):
+    for y in range(len(game_map)):
+        for x in range(len(game_map[y])):
             color = PASSABLE_COLOR
             pygame.draw.rect(screen, color, (x * tile_size, y * tile_size, tile_size, tile_size))
 
@@ -116,8 +142,8 @@ def generate_units():
     player_positions = [(0, i) for i in range(size)]
     enemy_positions = [(size - 1, i) for i in range(size)]
 
-    player_positions = random.sample(player_positions, 5)
-    enemy_positions = random.sample(enemy_positions, 5)
+    player_positions = random.sample(player_positions, 7)
+    enemy_positions = random.sample(enemy_positions, 7)
 
     player_units = [Unit(*pos, PLAYER_COLOR) for pos in player_positions]
     enemy_units = [Unit(*pos, ENEMY_COLOR) for pos in enemy_positions]
@@ -180,7 +206,7 @@ def draw_turn_indicator(screen, player_turn):
 def draw_end_turn_button(screen, width, height, interface_height):
     """Affiche le bouton de fin de tour."""
     font = pygame.font.SysFont(None, 36)
-    text = font.render("Terminé", True, (255, 255, 255))
+    text = font.render("", True, (255, 255, 255))
     button_rect = pygame.Rect(width // 2 - 50, height, 100, interface_height - 10)
     pygame.draw.rect(screen, (100, 100, 100), button_rect)
     screen.blit(text, (width // 2 - 50 + 10, height + 10))
@@ -214,12 +240,52 @@ def draw_scores(screen, player_score, enemy_score, width, height):
     screen.blit(player_score_img, (10, height + 70))
     screen.blit(enemy_score_img, (width - 150, height + 70))
 
+# Afficher le temps du jouer pour jouer 
+def time_left(screen, player_time, width, heigh):
+    "Affiche le temps qui reste au joueur pour jouer un coup"
+    font = pygame.font.SysFont(None, 24)
+    player_time_texte = f"Temps Restant: {player_time}"
+    player_time_img = font.render(player_time_texte, True, (255, 255, 255))
+    screen.blit(player_time_img, (10, height + 100))
+
 # Afficher le message de victoire
 def draw_victory_message(screen, message, width, height):
     """Affiche le message de victoire."""
     font = pygame.font.SysFont(None, 48)
     victory_img = font.render(message, True, (255, 255, 255))
     screen.blit(victory_img, (width // 2 - 100, height // 2 - 24))
+
+# Fonction pour le tour de l'IA
+def ai_turn(units, objectives):
+    """Exécute le tour de l'IA."""
+    enemy_units = [unit for unit in units if unit.color == ENEMY_COLOR]
+    player_units = [unit for unit in units if unit.color == PLAYER_COLOR]
+
+    for unit in enemy_units:
+        if unit.moved:
+            continue
+
+        # Priorité d'attaque si une unité ennemie est à portée
+        target_unit = next((u for u in player_units if unit.can_move(u.x, u.y)), None)
+        if target_unit:
+            unit.attack(target_unit, units, objectives)
+        else:
+            # Se déplacer vers l'objectif le plus proche
+            closest_objective = min(objectives, key=lambda obj: abs(unit.x - obj['x']) + abs (unit.y - obj['y']))
+            dx = closest_objective['x'] - unit.x
+            dy = closest_objective['y'] - unit.y
+
+            if abs(dx) > abs(dy):
+                new_x = unit.x + (1 if dx > 0 else -1)
+                new_y = unit.y
+            else:
+                new_x = unit.x
+                new_y = unit.y + (1 if dy > 0 else -1)
+            
+            if unit.can_move(new_x, new_y):
+                unit.move(new_x, new_y)
+        
+        unit.moved = True
 
 # Configuration de la fenêtre
 screen = pygame.display.set_mode((width, height + interface_height))
@@ -241,6 +307,29 @@ player_score = 0
 enemy_score = 0
 victory = False
 victory_message = ""
+player_time = 10
+
+class restart() :
+    def __init__(self,color, width, height, text=''):
+        self.color = color
+        self.width = width
+        self.height = height
+        self.text = text
+
+
+    def draw(self, win, outline=None) :
+        if outline:
+            pygame.draw.rect(win, outline)
+
+        if self.text != '':
+            font = pygame.font.SysFont('Rejouer', 60)
+            text = font.render(self.text, 1 (0, 0, 0))
+            win.blit(text)
+
+    def over(self, pos) :
+        if pos[0] > self.text and pos[0] < self.text + self.width:
+            if pos[1] > self.text and pos[1] < self.text + self.height:
+                return True
 
 # Boucle principale du jeu
 running = True
@@ -248,9 +337,6 @@ while running:
     if not victory:
         unit_moved = False
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    unit_moved = True
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -272,18 +358,18 @@ while running:
                                 selected_unit = possible_units[0]
                         if selected_unit:
                             selected_unit.selected = True
-
                     elif event.button == 3:  # Clic droit pour déplacer ou attaquer
                         if selected_unit and selected_unit.color == (PLAYER_COLOR if player_turn else ENEMY_COLOR):
                             target_unit = [u for u in units if u.x == grid_x and u.y == grid_y and u.color != selected_unit.color]
                             
-                            for cible in target_unit:
+                            for cible in target_unit:                                
                                 selected_unit.attack(cible, units, objectives)
                                 
                             if selected_unit.can_move(grid_x, grid_y):
                                 selected_unit.move(grid_x, grid_y)
                                 selected_unit.selected = False
                                 selected_unit = None
+                            
 
         if unit_moved:
             for unit in units_to_move:
@@ -295,10 +381,10 @@ while running:
             player_score += player_score_turn
             enemy_score += enemy_score_turn
 
-            if player_score >= 50:
+            if player_score >= 500:
                 victory = True
                 victory_message = "Victoire Joueur!"
-            elif enemy_score >= 50:
+            elif enemy_score >= 500:
                 victory = True
                 victory_message = "Victoire Ennemi!"
             elif not any(unit.color == PLAYER_COLOR for unit in units):
@@ -308,7 +394,12 @@ while running:
                 victory = True
                 victory_message = "Victoire Joueur!"
 
+            if not player_turn:
+                ai_turn(units, objectives)
+
             pygame.display.flip()
+            pygame.time.wait(0)
+
 
     screen.fill((0, 0, 0))
     draw_map(screen, game_map, tile_size)
@@ -321,19 +412,14 @@ while running:
     draw_end_turn_button(screen, width, height, interface_height)
     draw_unit_attributes(screen, selected_unit, width, height, interface_height)
     draw_scores(screen, player_score, enemy_score, width, height)
+    time_left(screen, player_time, width, height)
 
     if victory:
         draw_victory_message(screen, victory_message, width, height)
         pygame.display.flip()
         pygame.time.wait(5000)
         running = False
-<<<<<<< HEAD
-    def ia ():
-        
-=======
-    # def ia ():
-    #     pass
->>>>>>> ecf3abb9fc575943437073311a8961dba8f67d68
+
     pygame.display.flip()
 
 pygame.quit()
