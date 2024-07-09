@@ -1,9 +1,13 @@
 # Projet-annuel
-Jeu.py 
+
+Projet de création d'un jeu 
 
 
 # Objectif
+
 créer une IA pour battre le joueur
+
+
 
 ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/11d1c30e-9c19-47a7-98bd-ee0441b9bd3c)
 
