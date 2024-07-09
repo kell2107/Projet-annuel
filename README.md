@@ -22,5 +22,5 @@ Le but de ce jeu est de gagner soit en marquant des points indiquer sur la carte
 1 point jaune = 3 point
 
 
-Le pion : Les pions ne se déplacent que d'une case mais peuvent aller dans toutes les directions (devant, derrière, diagonale, horizontale, vertitale, en haut, en bas). Les pions ont 2 points de vie (pv) et pour faire baisser leurs pv, il faut 
+Le pion : Les pions ne se déplacent que d'une case mais peuvent aller dans toutes les directions (devant, derrière, diagonale, horizontale, vertitale, en haut, en bas). Les pions ont 2 points de vie (pv) et pour faire baisser leurs pv, il faut pousser le pion adversaire deux fois seulement alors il perdra 1 pv, ou il est possible de prendre le pion adversaire en blocand le pion adverse. 
 
