@@ -4,21 +4,20 @@ Projet de création d'un jeu
 
 
 # Objectif
-
-créer une IA pour battre le joueur
-
-
-
-![image](https://github.com/kell2107/Projet-annuel/assets/118818048/11d1c30e-9c19-47a7-98bd-ee0441b9bd3c)
+Ce dépot à pour but de créer un jeu ou les étudiants doivents créer une IA qui est difficile à battre.
 
 
 
-Les modifications que nous avons faites pour que l'IA soit opérationnels sont :
+![image](https://github.com/kell2107/Projet-annuel/assets/118818048/cc44beb3-9faa-49eb-88a1-7b41c14ccfc5)
 
-1) l'ajout d'une fonction de prise de désicion
-2) une fonction qui privilégie l'attaque si l'ennemie est proche
-3) une fonction qui vise tout les points sur la carte
-4) fonction d'un temps de pour prendre une décision pour jouer
-5) fonction qui affiche le déplacement des pions de l'IA
-6) fonction qui quand on appuie sur la barre espace on passe le tour à l'adversaire
-7) bouton pour quitter ou rejouer
+
+
+
+
+
+# Fonctionnement 
+Le but de ce jeu est de gagner soit en marquant des points indiquer sur la carte ou en prennant les pions adverses. Le plateau dispose de 14 pions (7 pions pour les deux joueurs). Le jeu oppose les pions bleu (joueur) contre les pions rouge (IA). Les pièces ne se déplacent que d'une case mais peuvent aller dans toutes les directions (devant, derrière, diagonale, horizontale, vertitale, en haut, en bas).
+
+
+
+
