@@ -415,7 +415,7 @@ while running:
             pygame.display.flip()
             pygame.time.wait(0)
 
-    # Drawing
+    
     screen.fill((0, 0, 0))
     draw_map(screen, game_map, tile_size)
     draw_objectives(screen, objectives, tile_size)
