@@ -46,5 +46,6 @@ Les améliorations que nous avons apporté pour que l'IA soit plus performante e
 5) fonction qui quand on appuie sur la barre espace on passe le tour à l'adversaire
 6) bouton pour quitter ou rejouer
 
+![image](https://github.com/kell2107/Projet-annuel/assets/118818048/c451b30c-4fdf-4e45-ad43-0cd0cafedfd4)
 
 
