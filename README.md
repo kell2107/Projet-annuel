@@ -35,20 +35,17 @@ Les améliorations que nous avons apporté pour que l'IA soit plus performante e
 ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/0e8b7e4a-0766-4ecb-90ae-a20752c831db)
 
 
-
-2) une fonction ou l'IA vise tout les points sur la carte
-3) fonction d'un temps pour prendre une décision pour jouer
+2) fonction d'un temps pour prendre une décision pour jouer
 
 ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/676050d1-8bd2-464b-b615-f2d55572a3e4)
 
 
-4) fonction qui affiche le déplacement des pions de l'IA
+3) fonction qui affiche le déplacement des pions de l'IA
 
 ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/639ab694-b605-4097-b505-a19f6ac43fe0)
 
 
-5) fonction qui quand on appuie sur la barre espace on passe le tour à l'adversaire
-6) bouton pour quitter ou rejouer
+4) bouton pour quitter ou rejouer
 
 ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/c451b30c-4fdf-4e45-ad43-0cd0cafedfd4)
 
