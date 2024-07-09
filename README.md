@@ -30,6 +30,12 @@ Le pion : Les pions ne se déplacent que d'une case mais peuvent aller dans tout
 Les améliorations que nous avons apporté pour que l'IA soit plus performante et plus difficile à battre nous avons ajouté plusieurs fonctions :
 
 1) une fonction qui priviligie l'attaque si l'ennemie est proche
+
+
+![image](https://github.com/kell2107/Projet-annuel/assets/118818048/0e8b7e4a-0766-4ecb-90ae-a20752c831db)
+
+
+
 2) une fonction qui vise tout les points sur la carte
 3) fonction d'un temps de pour prendre une décision pour jouer
 4) fonction qui affiche le déplacement des pions de l'IA
