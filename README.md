@@ -36,8 +36,12 @@ Les améliorations que nous avons apporté pour que l'IA soit plus performante e
 
 
 
-2) une fonction qui vise tout les points sur la carte
+2) une fonction ou l'IA vise tout les points sur la carte
 3) fonction d'un temps pour prendre une décision pour jouer
+
+![image](https://github.com/kell2107/Projet-annuel/assets/118818048/676050d1-8bd2-464b-b615-f2d55572a3e4)
+
+
 4) fonction qui affiche le déplacement des pions de l'IA
 
 ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/639ab694-b605-4097-b505-a19f6ac43fe0)
