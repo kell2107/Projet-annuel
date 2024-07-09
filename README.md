@@ -16,8 +16,8 @@ Ce dépot à pour but de créer un jeu ou les étudiants doivents créer une IA 
 
 
 # Fonctionnement 
-Le but de ce jeu est de gagner soit en marquant des points indiquer sur la carte ou en prennant les pions adverses. Le plateau dispose de 14 pions (7 pions pour les deux joueurs). Le jeu oppose les pions bleu (joueur) contre les pions rouge (IA). Les pièces ne se déplacent que d'une case mais peuvent aller dans toutes les directions (devant, derrière, diagonale, horizontale, vertitale, en haut, en bas).
+Le but de ce jeu est de gagner soit en marquant des points indiquer sur la carte ou en prennant les pions adverses. Le plateau dispose de 14 pions (7 pions pour les deux joueurs). Le jeu oppose les pions bleu (joueur) contre les pions rouge (IA). 
 
 
-
+Le pion : Les pions ne se déplacent que d'une case mais peuvent aller dans toutes les directions (devant, derrière, diagonale, horizontale, vertitale, en haut, en bas).
 
