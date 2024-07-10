@@ -54,4 +54,7 @@ Les améliorations que nous avons apporté pour que l'IA soit plus performante e
 ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/d7c43e74-74a2-468a-89b1-40bbb3a19846)
 
 
+6) Fonction de penser de l'IA
+
+![image](https://github.com/kell2107/Projet-annuel/assets/118818048/d4dec9c1-83ce-486b-b107-efcf5a78adcd)
 
