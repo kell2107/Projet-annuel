@@ -45,9 +45,7 @@ Les améliorations que nous avons apporté pour que l'IA soit plus performante e
 
 4) Bouton pour quitter ou rejouer
 
-![image](https://github.com/kell2107/Projet-annuel/assets/118818048/c451b30c-4fdf-4e45-ad43-0cd0cafedfd4)
-![image](https://github.com/kell2107/Projet-annuel/assets/118818048/7432de2d-c2f0-46e1-a96b-f06bfa5c8232)
-
+![image](https://github.com/kell2107/Projet-annuel/assets/118818048/c451b30c-4fdf-4e45-ad43-0cd0cafedfd4)  ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/7432de2d-c2f0-46e1-a96b-f06bfa5c8232)
 
 5) Passer au tour suivant avec la touche espace
 
