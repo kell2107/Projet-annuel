@@ -61,8 +61,13 @@ Les améliorations que nous avons apporté pour que l'IA soit plus performante e
 Nom des élèves :
 
 Potier-Clemente Florian
+
 YABA NGO LIBENGUE Charlotte
+
 Carnegie MOMO 
+
 Masghar Widad
+
 Loriente Lucas
+
 Borel AKAME TCHOKOUASSI Joel
