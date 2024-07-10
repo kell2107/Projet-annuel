@@ -43,7 +43,6 @@ Les améliorations que nous avons apporté pour que l'IA soit plus performante e
 ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/639ab694-b605-4097-b505-a19f6ac43fe0)
 
 
-
 4) Bouton pour quitter ou rejouer
 
 ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/c451b30c-4fdf-4e45-ad43-0cd0cafedfd4)
