@@ -65,6 +65,18 @@ class Unit:
                 return True
         return False
 
+    #fonction pour les enemy_units seulement vérifiant qu'il n'y aie pas déjà 2 unités présentes sur la case sauf pour les objectifs
+    def wont_overpopulate(self, x, y, units, objectives):
+        """Vérifie qu'il n'y a pas déjà deux unités ennemies sur la case cible sauf si c'est un objectif."""
+        # Vérifie que la case cible contient l'objectif Major, qui aura la priorité.
+        objective_on_tile = any(obj for obj in objectives if obj['x'] == x and obj['y'] == y and obj['type'] == 'MAJOR')
+        
+        if objective_on_tile:
+            return True
+        else:
+            enemy_units_on_tile = [unit for unit in units if unit.x == x and unit.y == y and unit.color == ENEMY_COLOR]
+            return len(enemy_units_on_tile) < 2
+
     def move(self, x, y):
         """Déplace l'unité vers une case spécifiée."""
         self.x = x
@@ -80,15 +92,23 @@ class Unit:
 
             if target_unit.attacked_this_turn:
                 target_unit.pv -= 1
+                target_unit.attacked_this_turn = False
                 if target_unit.pv <= 0:
                     units.remove(target_unit)
                     return
-
-            if not (0 <= new_x < size and 0 <= new_y < size) or any(u.x == new_x and u.y == new_y and u.color != target_unit.color for u in units):
-                units.remove(target_unit)
+                elif 0 <= new_x < size and 0 <= new_y < size:
+                    if any(u.x == new_x and u.y == new_y and u.color != target_unit.color for u in units) or any(obj['x'] == new_x and obj['y'] == new_y and obj['type'] == 'MAJOR' for obj in objectives):
+                        units.remove(target_unit)
+                    else:
+                        target_unit.move(new_x, new_y)
             else:
-                target_unit.move(new_x, new_y)
-                target_unit.attacked_this_turn = True
+                if 0 <= new_x < size and 0 <= new_y < size:
+                    if any(u.x == new_x and u.y == new_y and u.color != target_unit.color for u in units) or any(obj['x'] == new_x and obj['y'] == new_y for obj in objectives):
+                        units.remove(target_unit)
+                    else:
+                        target_unit.move(new_x, new_y)
+                        target_unit.attacked_this_turn = True
+
 
     def get_symbols_on_same_tile(self, units):
         """Retourne les symboles des unités sur la même case."""
@@ -131,7 +151,7 @@ class Unit:
         best_objective = max(objectives, key=objective_score)
 
         # Calculer les mouvements possibles
-        possible_moves = [(self.x + dx, self.y + dy) for dx in [-1, 0, 1] for dy in [-1, 0, 1] if self.can_move(self.x + dx, self.y + dy)]
+        possible_moves = [(self.x + dx, self.y + dy) for dx in [-1, 0, 1] for dy in [-1, 0, 1] if self.can_move(self.x + dx, self.y + dy) and self.wont_overpopulate(self.x + dx, self.y + dy, units, objectives)]
         if possible_moves:
             best_move = min(possible_moves, key=lambda move: distance(Unit(move[0], move[1], self.color), best_objective))
             self.move(*best_move)
