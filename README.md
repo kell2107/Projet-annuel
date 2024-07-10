@@ -57,3 +57,12 @@ Les améliorations que nous avons apporté pour que l'IA soit plus performante e
 
 ![image](https://github.com/kell2107/Projet-annuel/assets/118818048/d4dec9c1-83ce-486b-b107-efcf5a78adcd)
 
+
+Nom des élèves :
+
+Potier-Clemente Florian
+YABA NGO LIBENGUE Charlotte
+Carnegie MOMO 
+Masghar Widad
+Loriente Lucas
+Borel AKAME TCHOKOUASSI Joel
